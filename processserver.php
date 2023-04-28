@@ -16,7 +16,7 @@ if (!$conn) {
 // Insert data into the database if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $fname = ucwords(strtolower($_POST['fname']));
-    $lname = $_POST['lname'];
+    $lname = ucwords(strtolower($_POST['lname']));
     $zipcode = $_POST['zipcode'];
     $coins = $_POST['coins'];
 
@@ -47,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <body>
             <h1>Thank you for your purchase, ' . $fname . '!</h1>
             <p>You have purchased ' . $coins . ' coins. We will bill your account ending in ' . substr($zipcode, -4) . '.</p>
+            <a href="index.html">Go back to home</a>
         </body>
         </html>
     ';
@@ -56,5 +57,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // Close the database connection
 pg_close($conn);
 ?>
-
-
