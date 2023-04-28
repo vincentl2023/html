@@ -21,7 +21,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $coins = $_POST['coins'];
 
     $sql = "INSERT INTO purchases (first_name, last_name, billing_zipcode, coins)
-            VALUES ('$fname', '$lname', '$zipcode', '$coins')";
+        VALUES (INITCAP('$fname'), INITCAP('$lname'), '$zipcode', '$coins')";
     $result = pg_query($conn, $sql);
 
     if (!$result) {
