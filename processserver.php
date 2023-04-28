@@ -15,7 +15,7 @@ if (!$conn) {
 
 // Insert data into the database if the form has been submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fname = $_POST['fname'];
+    $fname = ucwords(strtolower($_POST['fname']));
     $lname = $_POST['lname'];
     $zipcode = $_POST['zipcode'];
     $coins = $_POST['coins'];
@@ -29,9 +29,28 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    echo "Data inserted successfully.";
+    // Display the HTML code after successful insertion
+    echo '
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <title>Thank you for your purchase!</title>
+            <style>
+                body {
+                    background-image: url(\'index2background.jpg\');
+                    background-size: cover;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                }
+            </style>
+        </head>
+        <body>
+            <h1>Thank you for your purchase, ' . $fname . '!</h1>
+            <p>You have purchased ' . $coins . ' coins. We will bill your account ending in ' . substr($zipcode, -4) . '.</p>
+        </body>
+        </html>
+    ';
 
-    header("Location: index.html");
 }
 
 // Close the database connection
